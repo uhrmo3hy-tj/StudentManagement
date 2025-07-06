@@ -30,7 +30,7 @@ public class StudentmanagementApplication {
 	@PostMapping("/students")
 	public String addStudent(@RequestParam String name, @RequestParam String age) {
 		studentMap.put(name, age);
-		return "Added student: " + name + " (age " + age + ")";
+		return "Added student: " + name + " (age: " + age + ")";
 	}
 }
 
