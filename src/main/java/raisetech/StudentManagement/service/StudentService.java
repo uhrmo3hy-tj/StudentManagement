@@ -25,5 +25,12 @@ public class StudentService {
     public List<StudentsCourses> searchStudentsCourseList() {
       return repository.searchStudentsCourses();
     }
-  }
+
+   @Autowired
+   private StudentRepository studentRepository;
+
+   public void insertStudent(Student student) {
+     studentRepository.insertStudent(student);
+   }
+ }
 
