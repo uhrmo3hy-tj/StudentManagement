@@ -3,8 +3,11 @@ package raisetech.StudentManagement.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import raisetech.StudentManagement.controller.converter.StudentConverter;
 import raisetech.StudentManagement.data.Student;
@@ -37,4 +40,31 @@ public class StudentController {
   public List<StudentsCourses> getStudentsCourseList() {
     return service.searchStudentsCourseList();
  }
+
+ @GetMapping("/newStudent")
+ public String newStudent(Model model){
+  model.addAttribute("studentDetail", new StudentDetail());
+  return"registerStudent";
+ }
+
+ @PostMapping("/registerStudent")
+  public String registerStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result){
+    if(result.hasErrors()){
+      return "registerStudent";
+    }
+
+   Student student = studentDetail.getStudent();
+
+   if(student.getEmail() == null || student.getEmail().isEmpty()){
+     result.rejectValue("student.email", "error.email", "me-ruadoresuhahissudesu");
+     return "registerStudent";
+   }
+
+   student.setId("s007");
+   service.insertStudent(student);
+
+   System.out.println(studentDetail.getStudent().getName() + "sanngasinnkizyukoudseitositetourokusaremasita");
+   return"redirect:/studentList";
+ }
+
 }
