@@ -15,4 +15,11 @@ public interface StudentRepository {
 
  @Select("SELECT * From student_courses")
  List<StudentsCourses>searchStudentsCourses();
+ kadai14
+
 }
+
+
+
+}
+ master

@@ -22,6 +22,10 @@ public class StudentService {
     return repository.search();
   }
 
+ kadai14
+    public List<StudentsCourses> searchStudentsCourseList() {
+      return repository.searchStudentsCourses();
+   
     public List<Student> getThirtysStudents() {
       return repository.search()
           .stream()
@@ -38,6 +42,6 @@ public class StudentService {
             .stream()
             .filter(c -> c.getCourseName().toLowerCase().contains("javako-su"))
             .collect(Collectors.toList());
-    }
+    } master
   }
 

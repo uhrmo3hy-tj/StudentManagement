@@ -12,6 +12,12 @@ import raisetech.StudentManagement.repository.StudentRepository;
 
 @SpringBootApplication
 public class StudentmanagementApplication {
+ kadai14
+
+  public static void main(String[] args) {
+    SpringApplication.run(StudentmanagementApplication.class, args);
+  }
+}
  kadai11
   public static void main(String[] args) {
     SpringApplication.run(StudentmanagementApplication.class, args);
@@ -42,3 +48,4 @@ public class StudentmanagementApplication {
 	}
 }
  master
+master
