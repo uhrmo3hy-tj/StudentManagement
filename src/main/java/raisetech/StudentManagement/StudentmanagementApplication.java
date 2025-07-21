@@ -12,8 +12,33 @@ import raisetech.StudentManagement.repository.StudentRepository;
 
 @SpringBootApplication
 public class StudentmanagementApplication {
-
+ kadai11
   public static void main(String[] args) {
     SpringApplication.run(StudentmanagementApplication.class, args);
   }
 }
+
+ kadai10
+  public static void main(String[] args) {
+    SpringApplication.run(StudentmanagementApplication.class, args);
+  }
+}
+
+	private final Map<String,String>studentMap = Collections.synchronizedMap(new HashMap<>());
+
+	public static void main(String[] args) {
+		SpringApplication.run(StudentmanagementApplication.class, args);
+	}
+
+	@GetMapping("/students")
+	public Map<String, String> getStudents() {
+		return studentMap;
+	}
+
+	@PostMapping("/students")
+	public String addStudent(@RequestParam String name, @RequestParam String age) {
+		studentMap.put(name, age);
+		return "Added student: " + name + " (age: " + age + ")";
+	}
+}
+ master
