@@ -1,20 +1,23 @@
 package raisetech.StudentManagement;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import raisetech.StudentManagement.data.Student;
+import raisetech.StudentManagement.data.StudentsCourses;
+import raisetech.StudentManagement.repository.StudentRepository;
 
 @SpringBootApplication
-@RestController
-@RequestMapping
 public class StudentmanagementApplication {
+
+ kadai10
+  public static void main(String[] args) {
+    SpringApplication.run(StudentmanagementApplication.class, args);
+  }
+}
 
 	private final Map<String,String>studentMap = Collections.synchronizedMap(new HashMap<>());
 
@@ -34,3 +37,4 @@ public class StudentmanagementApplication {
 	}
 }
 
+master
