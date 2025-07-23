@@ -32,39 +32,39 @@ public class StudentController {
     List<Student> students = service.searchStudentList();
     List<StudentsCourses> studentsCourses = service.searchStudentsCourseList();
 
-    model.addAttribute( "studentList",converter.convertStudentDetails(students, studentsCourses));
+    model.addAttribute("studentList", converter.convertStudentDetails(students, studentsCourses));
     return "studentList";
   }
 
   @GetMapping("/studentCourseList")
   public List<StudentsCourses> getStudentsCourseList() {
     return service.searchStudentsCourseList();
- }
+  }
 
- @GetMapping("/newStudent")
- public String newStudent(Model model){
-  model.addAttribute("studentDetail", new StudentDetail());
-  return"registerStudent";
- }
+  @GetMapping("/newStudent")
+  public String newStudent(Model model) {
+    model.addAttribute("studentDetail", new StudentDetail());
+    return "registerStudent";
+  }
 
- @PostMapping("/registerStudent")
-  public String registerStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result){
-    if(result.hasErrors()){
+  @PostMapping("/registerStudent")
+  public String registerStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result) {
+    if (result.hasErrors()) {
       return "registerStudent";
     }
 
-   Student student = studentDetail.getStudent();
+    Student student = studentDetail.getStudent();
 
-   if(student.getEmail() == null || student.getEmail().isEmpty()){
-     result.rejectValue("student.email", "error.email", "me-ruadoresuhahissudesu");
-     return "registerStudent";
-   }
+    if (student.getEmail() == null || student.getEmail().isEmpty()) {
+      result.rejectValue("student.email", "error.email", "me-ruadoresuhahissudesu");
+      return "registerStudent";
+    }
 
-   student.setId("s007");
-   service.insertStudent(student);
+    service.insertStudent(student);
 
-   System.out.println(studentDetail.getStudent().getName() + "sanngasinnkizyukoudseitositetourokusaremasita");
-   return"redirect:/studentList";
- }
+    System.out.println(
+        studentDetail.getStudent().getName() + "sanngasinnkizyukoudseitositetourokusaremasita");
+    return "redirect:/studentList";
+  }
 
 }
