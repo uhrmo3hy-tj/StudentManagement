@@ -63,7 +63,7 @@ public class StudentController {
     service.insertStudent(student);
 
     System.out.println(
-        studentDetail.getStudent().getName() + "sanngasinnkizyukoudseitositetourokusaremasita");
+        studentDetail.getStudent().getName() + "sanngasinnkizyukouseitositetourokusaremasita");
     return "redirect:/studentList";
   }
 

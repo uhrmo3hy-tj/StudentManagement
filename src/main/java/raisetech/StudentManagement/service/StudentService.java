@@ -11,7 +11,7 @@ import raisetech.StudentManagement.repository.StudentRepository;
 @Service
 public class StudentService {
 
-  private StudentRepository repository;
+  private final StudentRepository repository;
 
   @Autowired
   public StudentService(StudentRepository repository) {
@@ -22,15 +22,12 @@ public class StudentService {
     return repository.search();
   }
 
-    public List<StudentsCourses> searchStudentsCourseList() {
-      return repository.searchStudentsCourses();
-    }
+  public List<StudentsCourses> searchStudentsCourseList() {
+    return repository.searchStudentsCourses();
+  }
 
-   @Autowired
-   private StudentRepository studentRepository;
-
-   public void insertStudent(Student student) {
-     studentRepository.insertStudent(student);
-   }
- }
+  public void insertStudent(Student student) {
+    repository.insertStudent(student);
+  }
+}
 
