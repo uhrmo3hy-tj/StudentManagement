@@ -11,7 +11,7 @@ import raisetech.StudentManagement.repository.StudentRepository;
 @Service
 public class StudentService {
 
-  private StudentRepository repository;
+  private final StudentRepository repository;
 
   @Autowired
   public StudentService(StudentRepository repository) {
@@ -21,6 +21,10 @@ public class StudentService {
   public List<Student> searchStudentList() {
     return repository.search();
   }
+
+<<< kadai15
+  public List<StudentsCourses> searchStudentsCourseList() {
+    return repository.searchStudentsCourses();
 
  kadai14
     public List<StudentsCourses> searchStudentsCourseList() {
@@ -43,5 +47,11 @@ public class StudentService {
             .filter(c -> c.getCourseName().toLowerCase().contains("javako-su"))
             .collect(Collectors.toList());
     } master
+
   }
+
+  public void insertStudent(Student student) {
+    repository.insertStudent(student);
+  }
+}
 

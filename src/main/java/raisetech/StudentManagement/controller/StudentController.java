@@ -2,10 +2,18 @@ package raisetech.StudentManagement.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+kadai15
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
  kadai14
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+master
 import org.springframework.web.bind.annotation.RestController;
 import raisetech.StudentManagement.controller.converter.StudentConverter;
 import raisetech.StudentManagement.data.Student;
@@ -30,6 +38,10 @@ public class StudentController {
     List<Student> students = service.searchStudentList();
     List<StudentsCourses> studentsCourses = service.searchStudentsCourseList();
 
+ kadai15
+    model.addAttribute("studentList", converter.convertStudentDetails(students, studentsCourses));
+    return "studentList";
+
     model.addAttribute( "studentList",converter.convertStudentDetails(students, studentsCourses));
     return "studentList";
 
@@ -52,12 +64,41 @@ public class StudentController {
   @GetMapping("/studentList")
   public List<Student> getStudentList() {
     return service.searchStudentList();
-master
+ master
   }
 
   @GetMapping("/studentCourseList")
   public List<StudentsCourses> getStudentsCourseList() {
     return service.searchStudentsCourseList();
+ kadai15
+  }
+
+  @GetMapping("/newStudent")
+  public String newStudent(Model model) {
+    model.addAttribute("studentDetail", new StudentDetail());
+    return "registerStudent";
+  }
+
+  @PostMapping("/registerStudent")
+  public String registerStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result) {
+    if (result.hasErrors()) {
+      return "registerStudent";
+    }
+
+    Student student = studentDetail.getStudent();
+
+    if (student.getEmail() == null || student.getEmail().isEmpty()) {
+      result.rejectValue("student.email", "error.email", "me-ruadoresuhahissudesu");
+      return "registerStudent";
+    }
+
+    service.insertStudent(student);
+
+    System.out.println(
+        studentDetail.getStudent().getName() + "sanngasinnkizyukouseitositetourokusaremasita");
+    return "redirect:/studentList";
+  }
+
  kadai14
 
   }
@@ -72,4 +113,5 @@ public List<StudentsCourses> getJavaCoursesOnly() {
   return service.getJavaCoursesOnly();
 master
  }
+ master
 }
