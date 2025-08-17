@@ -38,11 +38,9 @@ public class StudentController {
     return "studentList";
   }
 
-  @GetMapping("/student/{id}")
-  public String getStudent(@PathVariable String id, Model model) {
-    StudentDetail studentDetail = service.searchStudent(id);
-    model.addAttribute("studentDetail", studentDetail);
-    return "updateStudent";
+  @GetMapping("/studentCourseList")
+  public List<StudentsCourses> getStudentsCourseList() {
+    return service.searchStudentsCourseList();
   }
 
   @GetMapping("/newStudent")
@@ -70,4 +68,5 @@ public class StudentController {
     service.updateStudent(studentDetail);
     return "redirect:/studentList";
   }
+
 }
