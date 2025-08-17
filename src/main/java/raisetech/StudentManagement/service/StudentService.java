@@ -1,17 +1,20 @@
 package raisetech.StudentManagement.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
+import raisetech.StudentManagement.domein.StudentDetail;
 import raisetech.StudentManagement.repository.StudentRepository;
 
 @Service
 public class StudentService {
 
-  private final StudentRepository repository;
+  private StudentRepository repository;
 
   @Autowired
   public StudentService(StudentRepository repository) {
@@ -22,36 +25,36 @@ public class StudentService {
     return repository.search();
   }
 
-<<< kadai15
+  public StudentDetail searchStudent(String id){
+    Student student = repository.searchStudent(id);
+    List<StudentsCourses> studentsCourses = repository.searchStudentsCourses(student.getId());
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.setStudent(student);
+    studentDetail.setStudentsCourses(studentsCourses);
+    return studentDetail;
+  }
+
   public List<StudentsCourses> searchStudentsCourseList() {
-    return repository.searchStudentsCourses();
-
- kadai14
-    public List<StudentsCourses> searchStudentsCourseList() {
-      return repository.searchStudentsCourses();
-   
-    public List<Student> getThirtysStudents() {
-      return repository.search()
-          .stream()
-          .filter(s -> s.getAge() >= 30 && s.getAge() <= 39)
-          .collect(Collectors.toList());
-    }
-
-    public List<StudentsCourses> searchStudentsCourseList() {
-      return repository.searchStudentsCourses();
-    }
-
-      public List<StudentsCourses> getJavaCoursesOnly() {
-        return repository.searchStudentsCourses()
-            .stream()
-            .filter(c -> c.getCourseName().toLowerCase().contains("javako-su"))
-            .collect(Collectors.toList());
-    } master
-
+    return repository.searchStudentsCoursesList();
   }
 
-  public void insertStudent(Student student) {
-    repository.insertStudent(student);
-  }
+  @Transactional
+  public void registerStudent(StudentDetail studentDetail){
+    repository.registerStudent(studentDetail.getStudent());
+    for (StudentsCourses studentsCourse : studentDetail.getStudentsCourses()){
+    studentsCourse.setStudentId(studentDetail.getStudent().getId());
+    studentsCourse.setStartDate(LocalDateTime.now());
+    studentsCourse.setEndDate(LocalDateTime.now().plusYears(1));
+    repository.registerStudentsCourses(studentsCourse);
+    }
 }
 
+
+@Transactional
+public void updateStudent(StudentDetail studentDetail) {
+  repository.updateStudent(studentDetail.getStudent());
+  for (StudentsCourses studentsCourse : studentDetail.getStudentsCourses()) {
+    repository.updateStudentCourses(studentsCourse);
+  }
+}
+}

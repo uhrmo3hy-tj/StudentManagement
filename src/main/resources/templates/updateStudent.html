@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>jukouseitouroku</title>
+  <title>jukouseisyousai</title>
 </head>
 <body>
-<h1>jukouseitouroku</h1>
-<form th:action="@{/registerStudent}" th:object="${studentDetail}" method="post">
+<h1>jukouseisyousai</h1>
+<form th:action="@{/updateStudent}" th:object="${studentDetail}" method="post">
 
   <div>
+    <label for="id">ID:</label>
+    <input type="text" id="id" th:field="*{student.id}" required/>
+    </div>
+    <div>
     <label for="name">namae</label>
     <input type="text" id="name" th:field="*{student.name}" required />
   </div>
@@ -39,21 +43,27 @@
 
   <div>
     <label for="gender">seibetu</label>
-    <input type="text" id="gender" th:field="*{student.gender}" />
+    <input type="text" id="gender" th:field="*{student.gender}"/>
   </div>
 
   <div>
     <label for="remark">bikou</label>
-    <input type="text" id="remark" th:field="*{student.remark}" />
+    <input type="text" id="remark" th:field="*{student.remark}"/>
   </div>
 
   <div th:each="course, stat : *{studentsCourses}">
-    <label>zyukouko-sumei: </label>
-    <input type="text"
-           th:id="'studentCourse_' + ${stat.index} + '_courseName'"
-           th:field="*{studentsCourses[__${stat.index}__].courseName}" />
+    <label for="id"
+           th:for="studentCourse.__${stat.index}__.id">jyukouko-suID: </label>
+    <input type="text"  id="id" th:id="studentCourse.__${stat.index}__.id"
+           th:field="*{studentsCourses[__${stat.index}__].id}"/>
+    <label for="courseName"
+           th:for="studentCourse.__${stat.index}__.courseName">zyukouko-sumei:</label>
+    <input type="text" id="courseName" th:id="studentCourse.__${stat.index}__.courseName"
+           th:field="*{studentsCourses[__${stat.index}__].courseName}"/>
   </div>
-  <button type="submit">touroku</button>
+  <div>
+  <button type="submit">kousinn</button>
+  </div>
 </form>
 </body>
 </html>

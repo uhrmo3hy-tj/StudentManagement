@@ -13,7 +13,6 @@ java {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
-
 configurations {
 	compileOnly{
 		extendsFrom annotationProcessor
@@ -29,7 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation ("org.apache.commons:commons-lang3:3.14.0")
+	implementation 'org.apache.commons:commons-lang3:3.14.0'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
