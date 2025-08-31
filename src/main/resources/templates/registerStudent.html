@@ -48,7 +48,7 @@
   </div>
 
   <div th:each="course, stat : *{studentsCourses}">
-    <label>zyukouko-sumei: </label>
+    <label>jyukouko-sumei: </label>
     <input type="text"
            th:id="'studentCourse_' + ${stat.index} + '_courseName'"
            th:field="*{studentsCourses[__${stat.index}__].courseName}" />

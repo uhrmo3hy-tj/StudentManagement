@@ -22,7 +22,10 @@ public class StudentService {
   }
 
   public List<Student> searchStudentList() {
-    return repository.search();
+    return repository.search()
+        .stream()
+        .filter(student -> !student.getIsDeleted())
+        .collect(Collectors.toList());
   }
 
   public StudentDetail searchStudent(String id){
