@@ -26,7 +26,7 @@ public interface StudentRepository {
   List<StudentsCourses> searchStudentsCourses(String studentId);
 
   @Insert(
-      "INSERT INTO students (id, name, kanaName, nickname, email, region, age, gender, remark, is_deleted) "
+      "INSERT INTO students (id, name, kanaName, nickname, email, region, age, gender, created_at, remark, is_deleted) "
           + "VALUES (#{id}, #{name}, #{kanaName}, #{nickname}, #{email}, #{region}, #{age}, #{gender}, NOW(), #{remark}, false)")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void registerStudent(Student student);

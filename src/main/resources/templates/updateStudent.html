@@ -50,14 +50,17 @@
     <label for="remark">bikou</label>
     <input type="text" id="remark" th:field="*{student.remark}"/>
   </div>
-
+ <div>
+   <label for="isDeleted">kyannseru</label>
+   <input type="checkbox" id="isDeleted" th:field="*{student.isDeleted}"/>
+ </div>>
   <div th:each="course, stat : *{studentsCourses}">
-    <label for="id"
+    <label for="studentCourseId"
            th:for="studentCourse.__${stat.index}__.id">jyukouko-suID: </label>
-    <input type="text"  id="id" th:id="studentCourse.__${stat.index}__.id"
+    <input type="text"  id="studentCourseId" th:id="studentCourse.__${stat.index}__.id"
            th:field="*{studentsCourses[__${stat.index}__].id}"/>
     <label for="courseName"
-           th:for="studentCourse.__${stat.index}__.courseName">zyukouko-sumei:</label>
+           th:for="studentCourse.__${stat.index}__.courseName">jyukouko-sumei:</label>
     <input type="text" id="courseName" th:id="studentCourse.__${stat.index}__.courseName"
            th:field="*{studentsCourses[__${stat.index}__].courseName}"/>
   </div>
@@ -65,5 +68,6 @@
   <button type="submit">kousinn</button>
   </div>
 </form>
+
 </body>
 </html>

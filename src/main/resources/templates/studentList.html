@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>jukouseiitiran</title>
+  <title>jukouseiitirann</title>
   <meta charset="UTF-8">
 </head>
 <body>
@@ -19,6 +19,7 @@
     <th>nenrei</th>
     <th>seibetu</th>
     <th>bikou</th>
+    <th>kyannseru</th>
   </tr>
   </thead>
   <tbody>
@@ -35,6 +36,9 @@
     <td th:text="${studentDetail.student.age}">25</td>
     <td th:text="${studentDetail.student.gender}">Dansei</td>
     <td th:text="${studentDetail.student.remark}"></td>
+    <td>
+    <input type="checkbox" th:checked="${studentDetail.student.isDeleted}"/>
+    </td>
   </tr>
   </tbody>
 </table>
