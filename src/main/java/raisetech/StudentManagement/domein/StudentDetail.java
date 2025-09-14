@@ -1,5 +1,6 @@
 package raisetech.StudentManagement.domein;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
