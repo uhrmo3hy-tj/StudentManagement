@@ -8,6 +8,9 @@ import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.domein.StudentDetail;
 
+/**
+ * 受講生詳細を受講生や受講生コース情報、もしくはその逆の変換を行うコンバーターです。
+ */
 @Component
 public class StudentConverter {
 

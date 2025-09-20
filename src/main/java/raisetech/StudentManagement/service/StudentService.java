@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import raisetech.StudentManagement.controller.converter.StudentConverter;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.domein.StudentDetail;
@@ -19,10 +20,12 @@ import raisetech.StudentManagement.repository.StudentRepository;
 public class StudentService {
 
   private StudentRepository repository;
+  private StudentConverter converter;
 
   @Autowired
-  public StudentService(StudentRepository repository) {
+  public StudentService(StudentRepository repository, StudentConverter converter) {
     this.repository = repository;
+    this.converter = converter;
   }
 
   /**
@@ -31,8 +34,11 @@ public class StudentService {
    *
    * @return　受講生一覧（全件）
    */
-  public List<Student> searchStudentList() {
-    return repository.search();
+
+  public List<StudentDetail> searchStudentList() {
+    List<Student> studentList = repository.search();
+    List<StudentsCourses> studentsCoursesList = repository.searchStudentsCoursesList();
+    return  converter.convertStudentDetails(studentList, studentsCoursesList);
   }
 
   /**
@@ -45,14 +51,8 @@ public class StudentService {
   public StudentDetail searchStudent(String id){
     Student student = repository.searchStudent(id);
     List<StudentsCourses> studentsCourses = repository.searchStudentsCourses(student.getId());
-    StudentDetail studentDetail = new StudentDetail();
-    studentDetail.setStudent(student);
-    studentDetail.setStudentsCourses(studentsCourses);
-    return studentDetail;
-  }
+    return new StudentDetail(student,studentsCourses);
 
-  public List<StudentsCourses> searchStudentsCourseList() {
-    return repository.searchStudentsCoursesList();
   }
 
   @Transactional
@@ -66,7 +66,6 @@ public class StudentService {
     }
     return studentDetail;
 }
-
 
 @Transactional
 public void updateStudent(StudentDetail studentDetail) {
