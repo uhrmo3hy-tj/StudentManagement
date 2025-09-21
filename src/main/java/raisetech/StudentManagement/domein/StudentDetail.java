@@ -1,36 +1,22 @@
 package raisetech.StudentManagement.domein;
 
-import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import raisetech.StudentManagement.data.Student;
-import raisetech.StudentManagement.data.StudentsCourses;
+import raisetech.StudentManagement.data.StudentCourse;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudentDetail {
 
   private Student student;
-  private List<StudentsCourses> studentsCourses;
-
-  public Student getStudent() {
-    return student;
+  private List<StudentCourse> studentCourseList;
   }
-
-  public void setStudent(Student student) {
-    this.student = student;
-  }
-
-  public List<StudentsCourses> getStudentsCourses() {
-    return studentsCourses;
-  }
-
-  public void setStudentsCourses(
-      List<StudentsCourses> studentsCourses) {
-    this.studentsCourses = studentsCourses;
-  }
-}
 
 
 
