@@ -19,9 +19,12 @@ import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.domein.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
+
 /**
  * 受講生の検索や登録、更新などを行うREST APIとして受け付けるControllerです。
  */
+
+
 @RestController
 public class StudentController {
 
@@ -32,12 +35,21 @@ public class StudentController {
     this.service = service;
   }
 
+
   /**
    * 受講生一覧検索です。
    * 全体検索を行うので、条件指定は行いません。
    *
    * @return　受講生一覧（全件）
    */
+=======
+  @GetMapping("/studentList")
+  public List<StudentDetail> getStudentList() {
+    List<Student> students = service.searchStudentList();
+    List<StudentsCourses> studentsCourses = service.searchStudentsCourseList();
+    return converter.convertStudentDetails(students, studentsCourses);
+  }
+
 
   @GetMapping("/studentList")
   public List<StudentDetail> getStudentList() {
@@ -68,5 +80,4 @@ public class StudentController {
     service.updateStudent(studentDetail);
     return ResponseEntity.ok("更新処理が成功しました。");
   }
-
 }
