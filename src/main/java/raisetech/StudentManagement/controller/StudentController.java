@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import raisetech.StudentManagement.domein.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
+
 /**
  * 受講生の検索や登録、更新などを行うREST APIとして受け付けるControllerです。
  */
+ kadai22
 @Validated
+
+ master
 @RestController
 public class StudentController {
 
@@ -29,11 +33,13 @@ public class StudentController {
     this.service = service;
   }
 
+
   /**
    * 受講生詳細の一覧検索です。全体検索を行うので、条件指定は行いません。
    *
    * @return　受講生詳細一覧（全件）
    */
+ 
   @GetMapping("/studentList")
   public List<StudentDetail> getStudentList() {
     return service.searchStudentList();

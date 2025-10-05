@@ -31,10 +31,17 @@ public class StudentService {
    *
    * @return　受講生詳細一覧（全件）
    */
+ kadai22
   public List<StudentDetail> searchStudentList() {
     List<Student> studentList = repository.search();
     List<StudentCourse> studentCourseList = repository.searchStudentCourseList();
     return converter.convertStudentDetails(studentList, studentCourseList);
+
+  public List<StudentDetail> searchStudentList() {
+    List<Student> studentList = repository.search();
+    List<StudentsCourses> studentsCoursesList = repository.searchStudentsCoursesList();
+    return  converter.convertStudentDetails(studentList, studentsCoursesList);
+ master
   }
 
   /**
@@ -46,8 +53,12 @@ public class StudentService {
 
   public StudentDetail searchStudent(String id){
     Student student = repository.searchStudent(id);
+ kadai22
     List<StudentCourse> studentCourse = repository.searchStudentCourse(student.getId());
     return new  StudentDetail(student, studentCourse);
+    List<StudentsCourses> studentsCourses = repository.searchStudentsCourses(student.getId());
+    return new StudentDetail(student,studentsCourses);
+ master
   }
 
   /**
@@ -69,6 +80,7 @@ public class StudentService {
     return studentDetail;
   }
 
+ kadai22
   /**
    * 受講生コース情報を登録する際の初期情報を設定する。
    *
@@ -89,6 +101,9 @@ public class StudentService {
    * @param studentDetail　受講生詳細
    */
   @Transactional
+
+@Transactional
+master
 public void updateStudent(StudentDetail studentDetail) {
   repository.updateStudent(studentDetail.getStudent());
     studentDetail.getStudentCourseList().

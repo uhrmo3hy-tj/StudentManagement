@@ -17,8 +17,10 @@ public class StudentDetail {
 
   @Valid
   private Student student;
+  kadai22
   private List<StudentCourse> studentCourseList;
   }
+
 
 
 
